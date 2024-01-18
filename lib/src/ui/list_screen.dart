@@ -1,15 +1,37 @@
+import 'package:anywhere_mobile_app/src/ui/view_models/characters_viewmodel.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
-class ListScreen extends StatefulWidget {
+class ListScreen extends StatelessWidget {
   const ListScreen({super.key});
 
   @override
-  State<ListScreen> createState() => _ListScreenState();
-}
-
-class _ListScreenState extends State<ListScreen> {
-  @override
   Widget build(BuildContext context) {
-    return const Placeholder();
+    return ChangeNotifierProvider(
+      create: (context) => CharactersViewModel(),
+      child: Scaffold(
+        appBar: AppBar(
+          title: const Text('The Wire Characters'),
+        ),
+        body: Consumer<CharactersViewModel>(
+          builder: (context, viewModel, child) {
+            if (viewModel.isLoading) {
+              return const CircularProgressIndicator();
+            } else if (viewModel.characters != null) {
+              return ListView.builder(
+                itemCount: viewModel.characters!.length,
+                itemBuilder: (context, index) {
+                  return ListTile(
+                    title: Text(viewModel.characters![index].name),
+                  );
+                },
+              );
+            } else {
+              return const Text('Failed to load characters');
+            }
+          },
+        ),
+      ),
+    );
   }
 }
