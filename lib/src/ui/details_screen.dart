@@ -1,7 +1,10 @@
+import 'package:anywhere_mobile_app/src/models/character_model.dart';
+import 'package:anywhere_mobile_app/src/ui/components/details_component.dart';
 import 'package:flutter/material.dart';
 
 class DetailsScreen extends StatefulWidget {
-  const DetailsScreen({super.key});
+  final Character character;
+  const DetailsScreen({super.key, required this.character});
 
   @override
   State<DetailsScreen> createState() => _DetailsScreenState();
@@ -10,6 +13,11 @@ class DetailsScreen extends StatefulWidget {
 class _DetailsScreenState extends State<DetailsScreen> {
   @override
   Widget build(BuildContext context) {
-    return const Placeholder();
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text('Character Details'),
+      ),
+      body: DetailsComponent(character: widget.character),
+    );
   }
 }

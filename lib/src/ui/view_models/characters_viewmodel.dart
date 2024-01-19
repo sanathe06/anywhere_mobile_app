@@ -1,5 +1,5 @@
 import 'package:anywhere_mobile_app/src/models/character_model.dart';
-import 'package:flutter/foundation.dart'; // Import the file where you defined the fetchCharacters function
+import 'package:flutter/foundation.dart';
 
 class CharactersViewModel extends ChangeNotifier {
   List<Character>? characters;
@@ -15,11 +15,10 @@ class CharactersViewModel extends ChangeNotifier {
 }
 
 Future<List<Character>> fetchCharacters() async {
-  // Simulate a network delay
   await Future.delayed(Duration(seconds: 2));
 
   return List<Character>.generate(
-      10,
+      40,
       (index) => Character(
             name: 'Character $index',
             url: 'http://example.com/character_$index',

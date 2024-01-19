@@ -1,3 +1,4 @@
+import 'package:anywhere_mobile_app/src/ui/components/list_component.dart';
 import 'package:anywhere_mobile_app/src/ui/view_models/characters_viewmodel.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -18,12 +19,10 @@ class ListScreen extends StatelessWidget {
             if (viewModel.isLoading) {
               return const CircularProgressIndicator();
             } else if (viewModel.characters != null) {
-              return ListView.builder(
-                itemCount: viewModel.characters!.length,
-                itemBuilder: (context, index) {
-                  return ListTile(
-                    title: Text(viewModel.characters![index].name),
-                  );
+              return ListComponent(
+                characters: viewModel.characters!,
+                onTap: (character) => {
+                  Navigator.pushNamed(context, '/details', arguments: character)
                 },
               );
             } else {

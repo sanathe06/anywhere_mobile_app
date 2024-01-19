@@ -1,3 +1,4 @@
+import 'package:anywhere_mobile_app/src/models/character_model.dart';
 import 'package:anywhere_mobile_app/src/ui/list_screen.dart';
 import 'package:flutter/material.dart';
 
@@ -14,10 +15,11 @@ class AppRouter {
           },
         );
       case '/details':
+        final character = settings.arguments as Character;
         return MaterialPageRoute<void>(
           settings: settings,
           builder: (BuildContext context) {
-            return const DetailsScreen();
+            return DetailsScreen(character: character);
           },
         );
       default:
