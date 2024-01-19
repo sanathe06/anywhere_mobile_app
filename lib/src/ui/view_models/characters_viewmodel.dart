@@ -3,14 +3,25 @@ import 'package:flutter/foundation.dart';
 
 class CharactersViewModel extends ChangeNotifier {
   List<Character>? characters;
+  Character? selectedCharacter;
   bool isLoading = true;
 
   CharactersViewModel() {
     fetchCharacters().then((newCharacters) {
       characters = newCharacters;
       isLoading = false;
+      isLoading = false;
+      if (characters != null && characters!.isNotEmpty) {
+        //setSelectedCharacter(characters!.first);
+        selectedCharacter = characters!.first;
+      }
       notifyListeners();
     });
+  }
+
+  void setSelectedCharacter(Character character) {
+    selectedCharacter = character;
+    notifyListeners();
   }
 }
 
