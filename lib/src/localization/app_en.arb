@@ -2,5 +2,13 @@
   "appTitle": "anywhere_mobile_app",
   "@appTitle": {
     "description": "The title of the application"
+  },
+  "search": "Search",
+  "@search": {
+    "description": "The label for the search input"
+  },
+  "noCharacterSelected": "No Character Selected",
+  "@noCharacterSelected": {
+    "description": "Message showing that no character has been selected"
   }
 }

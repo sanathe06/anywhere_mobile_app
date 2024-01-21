@@ -28,6 +28,7 @@ class ListScreen extends StatelessWidget {
               return const Center(child: CircularProgressIndicator());
             } else if (isTablet) {
               return Row(
+                crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Expanded(
                     child: ListComponent(

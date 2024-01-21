@@ -1,11 +1,13 @@
 import 'package:anywhere_mobile_app/src/ui/models/character.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class ListComponent extends StatelessWidget {
   final List<Character> characters;
   final Function(Character) onTap;
   final Function(String) onSearchTextChanged;
   final TextEditingController searchController;
+
   const ListComponent({
     super.key,
     required this.characters,
@@ -24,7 +26,7 @@ class ListComponent extends StatelessWidget {
             controller: searchController,
             onChanged: onSearchTextChanged,
             decoration: InputDecoration(
-              labelText: 'Search',
+              labelText: AppLocalizations.of(context)!.search,
               border: const OutlineInputBorder(),
               suffixIcon: IconButton(
                 icon: const Icon(Icons.close),
@@ -41,7 +43,10 @@ class ListComponent extends StatelessWidget {
             itemCount: characters.length,
             itemBuilder: (context, index) {
               return ListTile(
-                title: Text(characters[index].name),
+                title: Text(
+                  characters[index].name,
+                  style: Theme.of(context).textTheme.titleMedium,
+                ),
                 onTap: () => onTap(characters[index]),
               );
             },

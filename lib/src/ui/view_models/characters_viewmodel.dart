@@ -43,6 +43,7 @@ class CharactersViewModel extends ChangeNotifier {
                 .contains(searchText.toLowerCase());
       }).toList();
     }
+
     notifyListeners();
   }
 
@@ -55,6 +56,10 @@ class CharactersViewModel extends ChangeNotifier {
       (charactersData) {
         this.charactersData = charactersData;
         characters = List.from(charactersData.characters);
+        if (characters.isNotEmpty) {
+          setSelectedCharacter(characters
+              .first); // Set the first character as the selected character
+        }
         isLoading = false;
         notifyListeners();
       },

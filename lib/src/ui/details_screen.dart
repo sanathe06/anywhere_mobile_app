@@ -16,7 +16,7 @@ class _DetailsScreenState extends State<DetailsScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Character Details'),
+        title: Text(widget.character.name),
       ),
       body: DetailsComponent(character: widget.character),
     );
