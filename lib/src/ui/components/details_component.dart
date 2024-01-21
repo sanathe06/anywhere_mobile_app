@@ -6,7 +6,7 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 class DetailsComponent extends StatelessWidget {
   final Character? character;
 
-  const  DetailsComponent({super.key, required this.character});
+  const DetailsComponent({super.key, required this.character});
 
   @override
   Widget build(BuildContext context) {
@@ -21,7 +21,11 @@ class DetailsComponent extends StatelessWidget {
                   width: MediaQuery.of(context).size.width, // full width
                   fit: BoxFit.cover,
                 )
-              : Container(),
+              : Image.asset(
+                  'assets/images/place_holder.png',
+                  width: MediaQuery.of(context).size.width, // full width
+                  fit: BoxFit.cover,
+                ),
           Padding(
             padding: const EdgeInsets.all(16.0),
             child: Column(
