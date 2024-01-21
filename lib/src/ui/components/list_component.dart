@@ -1,4 +1,5 @@
 import 'package:anywhere_mobile_app/src/ui/models/character.dart';
+import 'package:anywhere_mobile_app/src/utils/screen_utils.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
@@ -7,6 +8,7 @@ class ListComponent extends StatelessWidget {
   final Function(Character) onTap;
   final Function(String) onSearchTextChanged;
   final TextEditingController searchController;
+  final Character? selectedCharacter;
 
   const ListComponent({
     super.key,
@@ -14,10 +16,12 @@ class ListComponent extends StatelessWidget {
     required this.onTap,
     required this.onSearchTextChanged,
     required this.searchController,
+    required this.selectedCharacter,
   });
 
   @override
   Widget build(BuildContext context) {
+    var isTablet = ScreenUtils.isTablet(context);
     return Column(
       children: [
         Padding(
@@ -43,12 +47,19 @@ class ListComponent extends StatelessWidget {
             itemCount: characters.length,
             itemBuilder: (context, index) {
               return ListTile(
-                title: Text(
-                  characters[index].name,
-                  style: Theme.of(context).textTheme.titleMedium,
-                ),
-                onTap: () => onTap(characters[index]),
-              );
+                  title: Text(
+                    characters[index].name,
+                    style: Theme.of(context).textTheme.titleMedium,
+                  ),
+                  onTap: () => onTap(characters[index]),
+                  tileColor: isTablet
+                      ? selectedCharacter?.name == characters[index].name
+                          ? Theme.of(context)
+                              .colorScheme
+                              .primary
+                              .withOpacity(0.8)
+                          : null
+                      : null);
             },
           ),
         ),

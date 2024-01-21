@@ -39,6 +39,7 @@ class ListScreen extends StatelessWidget {
                       },
                       onSearchTextChanged: viewModel.onSearchTextChanged,
                       searchController: viewModel.searchController,
+                      selectedCharacter: viewModel.selectedCharacter,
                     ),
                   ),
                   Expanded(
@@ -55,6 +56,7 @@ class ListScreen extends StatelessWidget {
                 },
                 onSearchTextChanged: viewModel.onSearchTextChanged,
                 searchController: viewModel.searchController,
+                selectedCharacter: viewModel.selectedCharacter,
               );
             }
           },

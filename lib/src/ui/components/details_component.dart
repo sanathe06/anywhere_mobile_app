@@ -6,7 +6,7 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 class DetailsComponent extends StatelessWidget {
   final Character? character;
 
-  const DetailsComponent({super.key, required this.character});
+  const  DetailsComponent({super.key, required this.character});
 
   @override
   Widget build(BuildContext context) {
