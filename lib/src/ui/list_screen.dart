@@ -17,43 +17,46 @@ class ListScreen extends StatelessWidget {
       create: (context) =>
           CharactersViewModel(CharacterRepository(ApiClient())),
       child: Scaffold(
-        appBar: AppBar(
-          title: const Text('The Wire Characters'),
-        ),
+        appBar: AppBar(title: Consumer<CharactersViewModel>(
+          builder: (context, viewModel, child) {
+            return Text(
+              viewModel.charactersData.characterName ?? '',
+            );
+          },
+        )),
         body: Consumer<CharactersViewModel>(
           builder: (context, viewModel, child) {
             if (viewModel.isLoading) {
               return const Center(child: CircularProgressIndicator());
-            } else if (viewModel.charactersData.characters != null) {
-              if (isTablet) {
-                return Row(
-                  children: [
-                    Expanded(
-                      child: ListComponent(
-                        characters: viewModel.charactersData.characters!,
-                        onTap: (character) => {
-                          // Do not navigate to details screen, instead update the selected character in the view model
-                          viewModel.setSelectedCharacter(character)
-                        },
-                      ),
+            } else if (isTablet) {
+              return Row(
+                children: [
+                  Expanded(
+                    child: ListComponent(
+                      characters: viewModel.characters,
+                      onTap: (character) => {
+                        // Do not navigate to details screen, instead update the selected character in the view model
+                        viewModel.setSelectedCharacter(character)
+                      },
+                      onSearchTextChanged: viewModel.onSearchTextChanged,
+                      searchController: viewModel.searchController,
                     ),
-                    Expanded(
-                      child: DetailsComponent(
-                          character: viewModel.selectedCharacter),
-                    ),
-                  ],
-                );
-              } else {
-                return ListComponent(
-                  characters: viewModel.charactersData.characters!,
-                  onTap: (character) => {
-                    Navigator.pushNamed(context, '/details',
-                        arguments: character)
-                  },
-                );
-              }
+                  ),
+                  Expanded(
+                    child: DetailsComponent(
+                        character: viewModel.selectedCharacter),
+                  ),
+                ],
+              );
             } else {
-              return const Text('Failed to load characters');
+              return ListComponent(
+                characters: viewModel.characters!,
+                onTap: (character) => {
+                  Navigator.pushNamed(context, '/details', arguments: character)
+                },
+                onSearchTextChanged: viewModel.onSearchTextChanged,
+                searchController: viewModel.searchController,
+              );
             }
           },
         ),
