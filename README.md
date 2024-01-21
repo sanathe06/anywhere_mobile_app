@@ -17,8 +17,12 @@ Tools • Dart 3.2.5 • DevTools 2.28.5
 
 ## Installation Guide
 
-Clone the repository from the main branch.
-Execute flutter pub get in your terminal to install the necessary dependencies.
+- Clone the repository from the main branch.
+- Execute flutter pub get in your terminal to install the necessary dependencies.
+
+```bash
+flutter pub get
+```
 
 ## The Wire Character Viewer
 
@@ -27,8 +31,6 @@ To launch the viewer for 'The Wire' characters, use the following command:
 ```bash
 flutter run --flavor wire -t lib/main_wire.dart
 ```
-
-run this command `flutter run --flavor wire -t lib/main_wire.dart`
 
 ## Simpsons Character Viewer
 
