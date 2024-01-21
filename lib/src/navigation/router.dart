@@ -1,8 +1,8 @@
-import 'package:anywhere_mobile_app/src/ui/list_screen.dart';
+import 'package:anywhere_mobile_app/src/ui/characters/characters_screen.dart';
 import 'package:anywhere_mobile_app/src/ui/models/character.dart';
 import 'package:flutter/material.dart';
 
-import '../ui/details_screen.dart';
+import '../ui/character/character_screen.dart';
 
 class AppRouter {
   static Route<dynamic> generateRoute(RouteSettings settings) {
@@ -11,7 +11,7 @@ class AppRouter {
         return MaterialPageRoute<void>(
           settings: settings,
           builder: (BuildContext context) {
-            return const ListScreen();
+            return const CharactersScreen();
           },
         );
       case '/details':
@@ -19,14 +19,14 @@ class AppRouter {
         return MaterialPageRoute<void>(
           settings: settings,
           builder: (BuildContext context) {
-            return DetailsScreen(character: character);
+            return CharacterScreen(character: character);
           },
         );
       default:
         return MaterialPageRoute<void>(
           settings: settings,
           builder: (BuildContext context) {
-            return const ListScreen();
+            return const CharactersScreen();
           },
         );
     }

@@ -2,5 +2,21 @@
   "appTitle": "anywhere_mobile_app",
   "@appTitle": {
     "description": "The title of the application"
+  },
+  "search": "Search",
+  "@search": {
+    "description": "The label for the search input"
+  },
+  "noCharacter": "No Characters",
+  "@noCharacter": {
+    "description": "Message showing that no character"
+  },
+  "ok": "OK",
+  "@ok": {
+    "description": "OK button text"
+  },
+  "error": "Error",
+  "@error": {
+    "description": "Error dialog title"
   }
 }
