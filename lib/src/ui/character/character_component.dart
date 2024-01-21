@@ -3,10 +3,10 @@ import 'package:anywhere_mobile_app/src/utils/screen_utils.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
-class DetailsComponent extends StatelessWidget {
+class CharacterComponent extends StatelessWidget {
   final Character? character;
 
-  const DetailsComponent({super.key, required this.character});
+  const CharacterComponent({super.key, required this.character});
 
   @override
   Widget build(BuildContext context) {

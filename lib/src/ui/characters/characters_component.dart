@@ -3,14 +3,14 @@ import 'package:anywhere_mobile_app/src/utils/screen_utils.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
-class ListComponent extends StatelessWidget {
+class CharactersComponent extends StatelessWidget {
   final List<Character> characters;
   final Function(Character) onTap;
   final Function(String) onSearchTextChanged;
   final TextEditingController searchController;
   final Character? selectedCharacter;
 
-  const ListComponent({
+  const CharactersComponent({
     super.key,
     required this.characters,
     required this.onTap,

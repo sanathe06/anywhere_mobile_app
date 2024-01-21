@@ -1,15 +1,15 @@
 import 'package:anywhere_mobile_app/app_config.dart';
 import 'package:anywhere_mobile_app/src/data/character_repository.dart';
 import 'package:anywhere_mobile_app/src/net/api.dart';
-import 'package:anywhere_mobile_app/src/ui/components/details_component.dart';
-import 'package:anywhere_mobile_app/src/ui/components/list_component.dart';
-import 'package:anywhere_mobile_app/src/ui/view_models/characters_viewmodel.dart';
+import 'package:anywhere_mobile_app/src/ui/character/character_component.dart';
+import 'package:anywhere_mobile_app/src/ui/characters/characters_component.dart';
+import 'package:anywhere_mobile_app/src/ui/characters/characters_viewmodel.dart';
 import 'package:anywhere_mobile_app/src/utils/screen_utils.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-class ListScreen extends StatelessWidget {
-  const ListScreen({super.key});
+class CharactersScreen extends StatelessWidget {
+  const CharactersScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -31,7 +31,7 @@ class ListScreen extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Expanded(
-                    child: ListComponent(
+                    child: CharactersComponent(
                       characters: viewModel.characters,
                       onTap: (character) => {
                         // Do not navigate to details screen, instead update the selected character in the view model
@@ -43,13 +43,13 @@ class ListScreen extends StatelessWidget {
                     ),
                   ),
                   Expanded(
-                    child: DetailsComponent(
+                    child: CharacterComponent(
                         character: viewModel.selectedCharacter),
                   ),
                 ],
               );
             } else {
-              return ListComponent(
+              return CharactersComponent(
                 characters: viewModel.characters!,
                 onTap: (character) => {
                   Navigator.pushNamed(context, '/details', arguments: character)
