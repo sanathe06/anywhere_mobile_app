@@ -1,4 +1,4 @@
-import 'package:anywhere_mobile_app/src/models/character_model.dart';
+import 'package:anywhere_mobile_app/src/ui/models/character.dart';
 import 'package:flutter/material.dart';
 
 class DetailsComponent extends StatelessWidget {
@@ -8,11 +8,13 @@ class DetailsComponent extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    print('character!.image! ${character!.image}');
     return Center(
       child: Column(
         children: [
           Text(character?.name ?? 'No character selected'),
-          Text(character?.text ?? ''),
+          Text(character?.description ?? ''),
+          character?.image != null ? Image.network(character!.image!) : Container(),
         ],
       ),
     );
