@@ -42,31 +42,38 @@ class CharactersComponent extends StatelessWidget {
             ),
           ),
         ),
-        Expanded(
-          child: Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: ListView.builder(
-              itemCount: characters.length,
-              itemBuilder: (context, index) {
-                return ListTile(
-                    title: Text(
-                      characters[index].name,
-                      style: Theme.of(context).textTheme.titleMedium,
-                    ),
-                    onTap: () => onTap(characters[index]),
-                    tileColor: isTablet
-                        ? selectedCharacter?.name == characters[index].name
-                            ? Theme.of(context)
-                                .colorScheme
-                                .primary
-                                .withOpacity(0.8)
-                            : null
-                        : null);
-              },
-            ),
-          ),
-        ),
+        characters.isEmpty
+            ? Expanded(
+                child: Center(
+                  child: Text(AppLocalizations.of(context)!.noCharacter),
+                ),
+              )
+            : Expanded(
+                child: Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: ListView.builder(
+                    itemCount: characters.length,
+                    itemBuilder: (context, index) {
+                      return buildListTile(index, context, isTablet);
+                    },
+                  ),
+                ),
+              ),
       ],
     );
+  }
+
+  ListTile buildListTile(int index, BuildContext context, bool isTablet) {
+    return ListTile(
+        title: Text(
+          characters[index].name,
+          style: Theme.of(context).textTheme.titleMedium,
+        ),
+        onTap: () => onTap(characters[index]),
+        tileColor: isTablet
+            ? selectedCharacter?.name == characters[index].name
+                ? Theme.of(context).colorScheme.primary.withOpacity(0.8)
+                : null
+            : null);
   }
 }

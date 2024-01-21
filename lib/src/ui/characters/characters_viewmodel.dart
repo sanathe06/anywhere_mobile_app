@@ -2,7 +2,6 @@ import 'dart:async';
 
 import 'package:anywhere_mobile_app/src/data/character_repository.dart';
 import 'package:anywhere_mobile_app/src/ui/models/character.dart';
-import 'package:flutter/foundation.dart';
 import 'package:flutter/widgets.dart';
 
 import '../models/characters.dart';
@@ -15,6 +14,9 @@ class CharactersViewModel extends ChangeNotifier {
   String searchText = '';
   List<Character> characters = [];
   final TextEditingController searchController = TextEditingController();
+
+  String? error;
+  bool errorOccurred = false;
 
   CharactersViewModel(this._characterRepository) {
     fetchCharacters();
@@ -61,13 +63,22 @@ class CharactersViewModel extends ChangeNotifier {
               .first); // Set the first character as the selected character
         }
         isLoading = false;
+        error = null;
+        errorOccurred = false;
         notifyListeners();
       },
       (failure) {
         // Handle the error here
         isLoading = false;
-        print('Error occurred: $failure');
+        error = 'Error occurred: $failure';
+        errorOccurred = true;
       },
     );
+  }
+
+  void resetError() {
+    error = null;
+    errorOccurred = false;
+    notifyListeners();
   }
 }

@@ -7,6 +7,7 @@ import 'package:anywhere_mobile_app/src/ui/characters/characters_viewmodel.dart'
 import 'package:anywhere_mobile_app/src/utils/screen_utils.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class CharactersScreen extends StatelessWidget {
   const CharactersScreen({super.key});
@@ -24,9 +25,15 @@ class CharactersScreen extends StatelessWidget {
         )),
         body: Consumer<CharactersViewModel>(
           builder: (context, viewModel, child) {
+            if (viewModel.errorOccurred) {
+              WidgetsBinding.instance.addPostFrameCallback((_) {
+                showErrorDialog(context, viewModel);
+              });
+            }
             if (viewModel.isLoading) {
               return const Center(child: CircularProgressIndicator());
-            } else if (isTablet) {
+            }
+            if (isTablet) {
               return Row(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
@@ -44,13 +51,14 @@ class CharactersScreen extends StatelessWidget {
                   ),
                   Expanded(
                     child: CharacterComponent(
-                        character: viewModel.selectedCharacter),
+                      character: viewModel.selectedCharacter,
+                    ),
                   ),
                 ],
               );
             } else {
               return CharactersComponent(
-                characters: viewModel.characters!,
+                characters: viewModel.characters,
                 onTap: (character) => {
                   Navigator.pushNamed(context, '/details', arguments: character)
                 },
@@ -61,6 +69,25 @@ class CharactersScreen extends StatelessWidget {
             }
           },
         ),
+      ),
+    );
+  }
+
+  void showErrorDialog(BuildContext context, CharactersViewModel viewModel) {
+    showDialog(
+      context: context,
+      builder: (context) => AlertDialog(
+        title: Text(AppLocalizations.of(context)!.error),
+        content: Text(viewModel.error!),
+        actions: [
+          TextButton(
+            child: Text(AppLocalizations.of(context)!.ok),
+            onPressed: () {
+              Navigator.of(context).pop();
+              viewModel.resetError();
+            },
+          ),
+        ],
       ),
     );
   }

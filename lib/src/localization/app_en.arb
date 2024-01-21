@@ -7,8 +7,16 @@
   "@search": {
     "description": "The label for the search input"
   },
-  "noCharacterSelected": "No Character Selected",
-  "@noCharacterSelected": {
-    "description": "Message showing that no character has been selected"
+  "noCharacter": "No Characters",
+  "@noCharacter": {
+    "description": "Message showing that no character"
+  },
+  "ok": "OK",
+  "@ok": {
+    "description": "OK button text"
+  },
+  "error": "Error",
+  "@error": {
+    "description": "Error dialog title"
   }
 }

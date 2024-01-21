@@ -38,8 +38,7 @@ class CharacterComponent extends StatelessWidget {
                 children: [
                   isTablet
                       ? Text(
-                          character?.name ??
-                              AppLocalizations.of(context)!.noCharacterSelected,
+                          character?.name ?? '',
                           style: Theme.of(context).textTheme.titleMedium,
                         )
                       : Container(),
