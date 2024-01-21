@@ -1,4 +1,4 @@
-import 'package:anywhere_mobile_app/src/models/character_model.dart';
+import 'package:anywhere_mobile_app/src/ui/models/character.dart';
 import 'package:flutter/material.dart';
 
 class ListComponent extends StatelessWidget {

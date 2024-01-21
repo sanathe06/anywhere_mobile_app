@@ -1,38 +1,43 @@
-import 'package:anywhere_mobile_app/src/models/character_model.dart';
+import 'dart:async';
+
+import 'package:anywhere_mobile_app/src/data/character_repository.dart';
+import 'package:anywhere_mobile_app/src/ui/models/character.dart';
 import 'package:flutter/foundation.dart';
 
+import '../models/characters.dart';
+
 class CharactersViewModel extends ChangeNotifier {
-  List<Character>? characters;
+  final CharacterRepository _characterRepository;
   Character? selectedCharacter;
+  late Characters charactersData;
   bool isLoading = true;
 
-  CharactersViewModel() {
-    fetchCharacters().then((newCharacters) {
-      characters = newCharacters;
-      isLoading = false;
-      isLoading = false;
-      if (characters != null && characters!.isNotEmpty) {
-        //setSelectedCharacter(characters!.first);
-        selectedCharacter = characters!.first;
-      }
-      notifyListeners();
-    });
+  CharactersViewModel(this._characterRepository) {
+    fetchCharacters();
   }
 
   void setSelectedCharacter(Character character) {
     selectedCharacter = character;
     notifyListeners();
   }
-}
 
-Future<List<Character>> fetchCharacters() async {
-  await Future.delayed(Duration(seconds: 2));
+  Future<void> fetchCharacters() async {
+    isLoading = true;
+    notifyListeners();
+    final result = await _characterRepository.fetchCharacters(
+        'http://api.duckduckgo.com/?q=simpsons+characters&format=json');
 
-  return List<Character>.generate(
-      40,
-      (index) => Character(
-            name: 'Character $index',
-            url: 'http://example.com/character_$index',
-            text: 'This is a description for Character $index',
-          ));
+    result.fold(
+      (charactersData) {
+        this.charactersData = charactersData;
+        isLoading = false;
+        notifyListeners();
+      },
+      (failure) {
+        // Handle the error here
+        isLoading = false;
+        print('Error occurred: $failure');
+      },
+    );
+  }
 }
