@@ -35,8 +35,12 @@ class CharactersViewModel extends ChangeNotifier {
       characters = charactersData.characters;
     } else {
       characters = charactersData.characters.where((character) {
-        return character.name.toLowerCase().contains(searchText.toLowerCase()) ||
-            character.description.toLowerCase().contains(searchText.toLowerCase());
+        return character.name
+                .toLowerCase()
+                .contains(searchText.toLowerCase()) ||
+            character.description
+                .toLowerCase()
+                .contains(searchText.toLowerCase());
       }).toList();
     }
     notifyListeners();
@@ -45,8 +49,7 @@ class CharactersViewModel extends ChangeNotifier {
   Future<void> fetchCharacters() async {
     isLoading = true;
     notifyListeners();
-    final result = await _characterRepository.fetchCharacters(
-        'http://api.duckduckgo.com/?q=simpsons+characters&format=json');
+    final result = await _characterRepository.fetchCharacters();
 
     result.fold(
       (charactersData) {

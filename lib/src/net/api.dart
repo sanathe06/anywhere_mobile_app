@@ -1,11 +1,14 @@
 import 'dart:convert';
 
+import 'package:anywhere_mobile_app/app_config.dart';
 import 'package:anywhere_mobile_app/src/models/charactors_data.dart';
 import 'package:http/http.dart' as http;
 import 'package:dartz/dartz.dart';
 
 class ApiClient {
-  Future<Either<CharactersData, String>> getCharacters(String apiUrl) async {
+  String apiUrl = AppConfig.getInstance().apiUrl;
+
+  Future<Either<CharactersData, String>> getCharacters() async {
     try {
       final response = await http.get(Uri.parse(apiUrl));
 
