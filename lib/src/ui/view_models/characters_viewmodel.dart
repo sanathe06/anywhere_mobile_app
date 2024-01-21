@@ -10,7 +10,7 @@ import '../models/characters.dart';
 class CharactersViewModel extends ChangeNotifier {
   final CharacterRepository _characterRepository;
   Character? selectedCharacter;
-  late AnyCharacters charactersData;
+  late Drama charactersData;
   bool isLoading = true;
   String searchText = '';
   List<Character> characters = [];

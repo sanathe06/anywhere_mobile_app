@@ -11,7 +11,7 @@ class CharacterRepository {
 
   CharacterRepository(this._apiClient);
 
-  AnyCharacters convertToCharacters(CharactersData charactersData) {
+  Drama convertToCharacters(CharactersData charactersData) {
     List<Character> characters =
         charactersData.relatedTopics.map((relatedTopic) {
       List<String> parts = relatedTopic.text.split(' - ');
@@ -21,8 +21,8 @@ class CharacterRepository {
       return Character(name: name, description: description, image: image);
     }).toList();
 
-    return AnyCharacters(
-        characterName: charactersData.heading, characters: characters);
+    return Drama(
+        name: charactersData.heading, characters: characters);
   }
 
   String? getImageUrl(RelatedTopic relatedTopic) {
@@ -34,7 +34,7 @@ class CharacterRepository {
         : null;
   }
 
-  Future<Either<AnyCharacters, String>> fetchCharacters() async {
+  Future<Either<Drama, String>> fetchCharacters() async {
     final result = await _apiClient.getCharacters();
     return result.fold(
       (charactersData) => Left(convertToCharacters(charactersData)),
