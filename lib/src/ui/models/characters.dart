@@ -1,10 +1,10 @@
 import 'package:anywhere_mobile_app/src/ui/models/character.dart';
 
-class Characters {
+class AnyCharacters {
   final String characterName;
   final List<Character> characters;
 
-  Characters({
+  AnyCharacters({
     required this.characterName,
     required this.characters,
   });

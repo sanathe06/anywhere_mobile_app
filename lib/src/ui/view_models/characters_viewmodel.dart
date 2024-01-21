@@ -3,14 +3,18 @@ import 'dart:async';
 import 'package:anywhere_mobile_app/src/data/character_repository.dart';
 import 'package:anywhere_mobile_app/src/ui/models/character.dart';
 import 'package:flutter/foundation.dart';
+import 'package:flutter/widgets.dart';
 
 import '../models/characters.dart';
 
 class CharactersViewModel extends ChangeNotifier {
   final CharacterRepository _characterRepository;
   Character? selectedCharacter;
-  late Characters charactersData;
+  late AnyCharacters charactersData;
   bool isLoading = true;
+  String searchText = '';
+  List<Character> characters = [];
+  final TextEditingController searchController = TextEditingController();
 
   CharactersViewModel(this._characterRepository) {
     fetchCharacters();
@@ -18,6 +22,23 @@ class CharactersViewModel extends ChangeNotifier {
 
   void setSelectedCharacter(Character character) {
     selectedCharacter = character;
+    notifyListeners();
+  }
+
+  void onSearchTextChanged(String text) {
+    searchText = text;
+    filterCharacters();
+  }
+
+  void filterCharacters() {
+    if (searchText.isEmpty) {
+      characters = charactersData.characters;
+    } else {
+      characters = charactersData.characters.where((character) {
+        return character.name.toLowerCase().contains(searchText.toLowerCase()) ||
+            character.description.toLowerCase().contains(searchText.toLowerCase());
+      }).toList();
+    }
     notifyListeners();
   }
 
@@ -30,6 +51,7 @@ class CharactersViewModel extends ChangeNotifier {
     result.fold(
       (charactersData) {
         this.charactersData = charactersData;
+        characters = List.from(charactersData.characters);
         isLoading = false;
         notifyListeners();
       },
