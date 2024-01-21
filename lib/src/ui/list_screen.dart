@@ -1,3 +1,4 @@
+import 'package:anywhere_mobile_app/app_config.dart';
 import 'package:anywhere_mobile_app/src/data/character_repository.dart';
 import 'package:anywhere_mobile_app/src/net/api.dart';
 import 'package:anywhere_mobile_app/src/ui/components/details_component.dart';
@@ -17,12 +18,9 @@ class ListScreen extends StatelessWidget {
       create: (context) =>
           CharactersViewModel(CharacterRepository(ApiClient())),
       child: Scaffold(
-        appBar: AppBar(title: Consumer<CharactersViewModel>(
-          builder: (context, viewModel, child) {
-            return Text(
-              viewModel.charactersData.characterName ?? '',
-            );
-          },
+        appBar: AppBar(
+            title: Text(
+          AppConfig.getInstance().appName,
         )),
         body: Consumer<CharactersViewModel>(
           builder: (context, viewModel, child) {
