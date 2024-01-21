@@ -12,39 +12,45 @@ class CharacterComponent extends StatelessWidget {
   Widget build(BuildContext context) {
     var isTablet = ScreenUtils.isTablet(context);
     return SingleChildScrollView(
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.start,
-        children: [
-          character?.image != null
-              ? Image.network(
-                  character!.image!,
-                  width: MediaQuery.of(context).size.width, // full width
-                  fit: BoxFit.cover,
-                )
-              : Image.asset(
-                  'assets/images/place_holder.png',
-                  width: MediaQuery.of(context).size.width, // full width
-                  fit: BoxFit.cover,
-                ),
-          Padding(
-            padding: const EdgeInsets.all(16.0),
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.start,
-              children: [
-                isTablet
-                    ? Text(
-                        character?.name ??
-                            AppLocalizations.of(context)!.noCharacterSelected,
-                        style: Theme.of(context).textTheme.titleMedium,
-                      )
-                    : Container(),
-                const SizedBox(height: 16),
-                Text(character?.description ?? '',
-                    style: Theme.of(context).textTheme.bodyMedium),
-              ],
+      child: Padding(
+        padding: isTablet
+            ? const EdgeInsets.all(8.0)
+            : const EdgeInsets.only(
+                top: 0.0, bottom: 8.0, left: 0.0, right: 0.0),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.start,
+          children: [
+            character?.image != null
+                ? Image.network(
+                    character!.image!,
+                    width: MediaQuery.of(context).size.width, // full width
+                    fit: BoxFit.cover,
+                  )
+                : Image.asset(
+                    'assets/images/place_holder.png',
+                    width: MediaQuery.of(context).size.width, // full width
+                    fit: BoxFit.cover,
+                  ),
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.start,
+                children: [
+                  isTablet
+                      ? Text(
+                          character?.name ??
+                              AppLocalizations.of(context)!.noCharacterSelected,
+                          style: Theme.of(context).textTheme.titleMedium,
+                        )
+                      : Container(),
+                  const SizedBox(height: 16),
+                  Text(character?.description ?? '',
+                      style: Theme.of(context).textTheme.bodyMedium),
+                ],
+              ),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }
