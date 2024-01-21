@@ -34,8 +34,8 @@ class CharacterRepository {
         : null;
   }
 
-  Future<Either<AnyCharacters, String>> fetchCharacters(String apiUrl) async {
-    final result = await _apiClient.getCharacters(apiUrl);
+  Future<Either<AnyCharacters, String>> fetchCharacters() async {
+    final result = await _apiClient.getCharacters();
     return result.fold(
       (charactersData) => Left(convertToCharacters(charactersData)),
       (error) => Right(error),
